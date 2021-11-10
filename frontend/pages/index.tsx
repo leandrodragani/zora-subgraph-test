@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { createClient } from 'urql'
@@ -25,16 +26,16 @@ const client = createClient({
 })
 
 const Home = props => {
-  console.log(props)
   return (
-    <div className="grid grid-cols-4 gap-4 px-10 py-10">
-      {props.tokens.map(token => {
-        return (
-          <div
-            key={token.id}
-            className="shadow-lg bg-transparent rounded-2xl overflow-hidden"
-          >
-            <div key={token.contentURI} className="w-100% h-100%">
+    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+        Displaying Tokens from Subgraph
+      </h2>
+
+      <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 mt-10">
+        {props.tokens.map(token => (
+          <a key={token.id} href="#" className="group">
+            <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8 h-96 justify-center flex items-center">
               {token.type === 'image' && (
                 <div style={{ height: '320px', overflow: 'hidden' }}>
                   <img style={{ minHeight: '320px' }} src={token.contentURI} />
@@ -82,27 +83,20 @@ const Home = props => {
                   Your browser does not support the audio element.
                 </audio>
               )}
-              <div className="px-2 pt-2 pb-10">
-                <h3
-                  style={{ height: 100 }}
-                  className="text-2xl p-4 pt-6 font-semibold"
-                >
-                  {token.meta.name}
+            </div>
+            {token.type === 'audio' && (
+              <>
+                <h3 className="mt-4 text-sm text-gray-700">
+                  {token.meta.body.artist}
                 </h3>
-                <h2
-                  style={{ height: 100 }}
-                  className="text-xl p-4 pt-6 font-semibold"
-                >
-                  {token.meta.description}
-                </h2>
-              </div>
-            </div>
-            <div className="bg-black p-10">
-              <p className="text-white">Price</p>
-            </div>
-          </div>
-        )
-      })}
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  {token.meta.body.title}
+                </p>
+              </>
+            )}
+          </a>
+        ))}
+      </div>
     </div>
   )
 }
