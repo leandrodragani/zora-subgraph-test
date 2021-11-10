@@ -1,0 +1,16 @@
+{
+  "name": "zoralivestreamtest",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ zoralivestreamtest",
+    "create-local": "graph create --node http://localhost:8020/ zoralivestreamtest",
+    "remove-local": "graph remove --node http://localhost:8020/ zoralivestreamtest",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 zoralivestreamtest"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.23.1",
+    "@graphprotocol/graph-ts": "0.23.1"
+  }
+}
